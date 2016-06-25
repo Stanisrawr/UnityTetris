@@ -7,15 +7,6 @@ public class Grid : MonoBehaviour {
 	public static int width=10;
 	public static Transform[,] grid = new Transform[width, height];
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-
-
-	// Update is called once per frame
-	void Update () {
-	}
 
 	public static Vector2 roundVector(Vector2 v)
 	{
@@ -43,7 +34,54 @@ public class Grid : MonoBehaviour {
 
 	public static void decreaseRow(int y)
 	{
+		for(int x=0;x<width;x++)
+		{
+			if (grid [x, y] != null)
+			{	
+				//moves row towards bottom
+				grid[x,y-1]=grid[x,y];
+				grid [x, y] = null;
 
+
+				//Updates block position 
+				grid[x,y-1].position+=new Vector3(0,-1,0);
+			
+			}
+
+
+		}
+
+	}
+	public static void decreaseRowAbove(int y)
+	{
+		for (int i = y; i < height; i++)
+		{
+			decreaseRow (i);
+		}
+
+	}
+
+	public static bool isRowFull(int y)
+	{
+		for (int x = 0; x < width; ++x)
+		{
+			if (grid [x, y] == null)
+				return false;
+		}
+		return true;
+	}
+
+	public static void deleteFullRows()
+	{
+		for (int y = 0; y < height; ++y)
+		{
+			if (isRowFull(y))
+			{
+				deleteRow(y);
+				decreaseRowAbove(y+1);
+				--y;
+			}
+		}
 	}
 }
 
