@@ -23,7 +23,7 @@ public class Grid : MonoBehaviour {
 	public static void deleteRow(int y)
 	{
 
-		for (int x = 0; x < width; x++) 
+		for (int x = 0; x <= width; x++) 
 		{
 			Destroy(grid[x,y].gameObject);
 			grid [x, y] = null;

@@ -18,7 +18,7 @@ public class Group : MonoBehaviour {
 	void Update () {
 		// Time since last gravity tick
 		float lastFall = 0;
-
+		float fallSpeed=-0.02f;
 		// Move Left
 		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
 			// Modify position
@@ -64,7 +64,7 @@ public class Group : MonoBehaviour {
 		else if (Input.GetKeyDown(KeyCode.DownArrow) ||
 			Time.time - lastFall >= 1) {
 			// Modify position
-			transform.position += new Vector3(0, -1, 0);
+			transform.position += new Vector3(0, fallSpeed, 0);
 
 			// See if valid
 			if (isValidGridPos()) {
@@ -82,6 +82,8 @@ public class Group : MonoBehaviour {
 
 				// Disable script
 				enabled = false;
+
+
 			}
 
 			lastFall = Time.time;
